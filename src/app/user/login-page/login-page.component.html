@@ -1,0 +1,43 @@
+<mat-card *ngIf="!isLoggedIn">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        placeholder="Email"
+        autocomplete="off"
+      />
+
+      <mat-error *ngIf="email!.invalid && email!.dirty">
+        Введите корректный адрес электронной почты.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        placeholder="Password"
+        autocomplete="off"
+      />
+
+      <mat-error *ngIf="password!.dirty"> Введите пароль. </mat-error>
+    </mat-form-field>
+
+    <mat-error class="server-error">{{ errorMessage }}</mat-error>
+
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="form.invalid || loading"
+    >
+      Войти
+    </button>
+  </form>
+</mat-card>
+<mat-card *ngIf="isLoggedIn">
+	<p>Привет, {{loggedInUserName}}</p>
+</mat-card>

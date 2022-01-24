@@ -1,1 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$purple-palette: (
+    50 : #edeaf4,
+    100 : #d1cae5,
+    200 : #b3a7d3,
+    300 : #9583c1,
+    400 : #7e69b4,
+    500 : #674ea7,
+    600 : #5f479f,
+    700 : #543d96,
+    800 : #4a358c,
+    900 : #39257c,
+    A100 : #cbbdff,
+    A200 : #a28aff,
+    A400 : #7a57ff,
+    A700 : #663dff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$rt-labs-primary: mat.define-palette($purple-palette);
+$rt-labs-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$rt-labs-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$rt-labs-theme: mat.define-light-theme(
+	(
+		color: (
+			primary: $rt-labs-primary,
+			accent: $rt-labs-accent,
+			warn: $rt-labs-warn,
+		),
+	)
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($rt-labs-theme);
+
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+}
